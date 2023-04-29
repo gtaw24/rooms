@@ -1,70 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Restaurant Tables</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-	<h1>Restaurant Tables</h1>
-
-	<table>
-		<tr>
-			<th>Table Number</th>
-			<th>Status</th>
-			<th>Product List</th>
-			<th>Total</th>
-		</tr>
-		<tr>
-			<td>101</td>
-			<td id="table101status">Available</td>
-			<td id="table101productlist"></td>
-			<td id="table101total"></td>
-			<td><button onclick="toggleTableStatus('table101status')">Open/Close</button></td>
-		</tr>
-		<tr>
-			<td>102</td>
-			<td id="table102status">Available</td>
-			<td id="table102productlist"></td>
-			<td id="table102total"></td>
-			<td><button onclick="toggleTableStatus('table102status')">Open/Close</button></td>
-		</tr>
-		<tr>
-			<td>103</td>
-			<td id="table103status">Available</td>
-			<td id="table103productlist"></td>
-			<td id="table103total"></td>
-			<td><button onclick="toggleTableStatus('table103status')">Open/Close</button></td>
-		</tr>
-		<tr>
-			<td>104</td>
-			<td id="table104status">Available</td>
-			<td id="table104productlist"></td>
-			<td id="table104total"></td>
-			<td><button onclick="toggleTableStatus('table104status')">Open/Close</button></td>
-		</tr>
-		<tr>
-			<td>105</td>
-			<td id="table105status">Available</td>
-			<td id="table105productlist"></td>
-			<td id="table105total"></td>
-			<td><button onclick="toggleTableStatus('table105status')">Open/Close</button></td>
-		</tr>
-		<tr>
-			<td>106</td>
-			<td id="table106status">Available</td>
-			<td id="table106productlist"></td>
-			<td id="table106total"></td>
-			<td><button onclick="toggleTableStatus('table106status')">Open/Close</button></td>
-		</tr>
-		<tr>
-			<td>107</td>
-			<td id="table107status">Available</td>
-			<td id="table107productlist"></td>
-			<td id="table107total"></td>
-			<td><button onclick="toggleTableStatus('table107status')">Open/Close</button></td>
-		</tr>
-	</table>
-
-	<script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Restaurant Tables</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <ul class="nav">
+        <li class="active" onclick="openTab('tables')">Tables</li>
+        <li onclick="openTab('reservations')">Reservations</li>
+      </ul>
+      <div id="tables" class="tab-content active">
+        <h2>Tables</h2>
+        <div class="tables-container"></div>
+      </div>
+      <div id="reservations" class="tab-content">
+        <h2>Reservations</h2>
+        <form id="reservation-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required><br><br>
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required><br><br>
+          <label for="time">Time:</label>
+          <input type="time" id="time" name="time" required><br><br>
+          <label for="table">Table:</label>
+          <select id="table" name="table" required>
+            <option value="">Select a table</option>
+          </select><br><br>
+          <button type="submit">Submit</button>
+        </form>
+        <div id="reservations-list"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
