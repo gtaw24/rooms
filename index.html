@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Restaurant Tables</title>
+    <title>Hotel Management System</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="container">
-      <ul class="nav">
-        <li class="active" onclick="openTab('tables')">Tables</li>
-        <li onclick="openTab('reservations')">Reservations</li>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">Rooms</a></li>
+        <li><a href="#">Reservations</a></li>
       </ul>
-      <div id="tables" class="tab-content active">
-        <h2>Tables</h2>
-        <div class="tables-container"></div>
+    </nav>
+    <div class="container">
+      <div class="rooms tabcontent">
+        <h1>Hotel Rooms</h1>
+        <div class="rooms-container">
+          <div class="room available" id="101"></div>
+          <div class="room available" id="102"></div>
+          <div class="room available" id="103"></div>
+          <div class="room available" id="104"></div>
+          <div class="room available" id="105"></div>
+          <div class="room available" id="106"></div>
+          <div class="room available" id="107"></div>
+        </div>
       </div>
-      <div id="reservations" class="tab-content">
-        <h2>Reservations</h2>
-        <form id="reservation-form">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required><br><br>
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required><br><br>
-          <label for="time">Time:</label>
-          <input type="time" id="time" name="time" required><br><br>
-          <label for="table">Table:</label>
-          <select id="table" name="table" required>
-            <option value="">Select a table</option>
-          </select><br><br>
-          <button type="submit">Submit</button>
+      <div class="reservations tabcontent">
+        <h1>Reservations</h1>
+        <form>
+          <label for="fname">First Name:</label><br>
+          <input type="text" id="fname" name="fname"><br>
+          <label for="lname">Last Name:</label><br>
+          <input type="text" id="lname" name="lname"><br>
+          <label for="date">Date:</label><br>
+          <input type="date" id="date" name="date"><br>
+          <label for="time">Time:</label><br>
+          <input type="time" id="time" name="time"><br><br>
+          <input type="submit" value="Submit">
         </form>
-        <div id="reservations-list"></div>
+        <div class="reservations-container">
+          <h2>Current Reservations</h2>
+          <ul id="reservations-list">
+          </ul>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>
