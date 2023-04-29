@@ -1,67 +1,32 @@
-// Initialize the room status as available for all rooms
-let rooms = {
-  101: { status: "available", total: 0, products: [] },
-  102: { status: "available", total: 0, products: [] },
-  103: { status: "available", total: 0, products: [] },
-  104: { status: "available", total: 0, products: [] },
-  105: { status: "available", total: 0, products: [] },
-  106: { status: "available", total: 0, products: [] },
-  107: { status: "available", total: 0, products: [] },
-};
+// Get the elements
+const room = document.getElementById('101');
+const popup = document.getElementById('popup');
+const addProductBtn = document.getElementById('add-product-btn');
+const clearRoomBtn = document.getElementById('clear-room-btn');
+const generateInvoiceBtn = document.getElementById('generate-invoice-btn');
 
-// Function to toggle room status
-function toggleStatus(roomNumber) {
-  const room = rooms[roomNumber];
-  if (room.status === "available") {
-    room.status = "occupied";
-    document.getElementById(roomNumber).classList.remove("available");
-    document.getElementById(roomNumber).classList.add("occupied");
-  } else {
-    room.status = "available";
-    document.getElementById(roomNumber).classList.remove("occupied");
-    document.getElementById(roomNumber).classList.add("available");
-  }
-}
+// Set initial product and price totals to 0
+let products = 0;
+let prices = 0;
 
-// Function to add product and price to the room
-function addProduct(roomNumber, product, price) {
-  const room = rooms[roomNumber];
-  room.products.push({ product: product, price: price });
-  room.total += price;
-  document.getElementById(`${roomNumber}-total`).textContent = room.total;
-  document.getElementById(roomNumber).classList.add("occupied");
-}
+// Add click event to the room
+room.addEventListener('click', () => {
+   popup.style.display = 'block';
+});
 
-// Function to clear the room
-function clearRoom(roomNumber) {
-  const room = rooms[roomNumber];
-  room.status = "available";
-  room.total = 0;
-  room.products = [];
-  document.getElementById(`${roomNumber}-total`).textContent = "";
-  document.getElementById(roomNumber).classList.remove("occupied");
-  document.getElementById(roomNumber).classList.add("available");
-}
+// Add click event to the Add or Remove Products and Prices button
+addProductBtn.addEventListener('click', () => {
+   // TODO: Add logic for adding or removing products and prices
+});
 
-// Add event listeners to all room squares
-const roomSquares = document.querySelectorAll(".room");
-roomSquares.forEach((square) => {
-  square.addEventListener("click", () => {
-    const roomNumber = square.id;
-    const room = rooms[roomNumber];
-    if (room.status === "available") {
-      const product = prompt("Enter product name:");
-      const price = parseInt(prompt("Enter product price:"));
-      if (product && price) {
-        addProduct(roomNumber, product, price);
-      }
-    } else {
-      const confirmClear = confirm(
-        `Are you sure you want to clear room ${roomNumber}?`
-      );
-      if (confirmClear) {
-        clearRoom(roomNumber);
-      }
-    }
-  });
+// Add click event to the Clear Room button
+clearRoomBtn.addEventListener('click', () => {
+   // TODO: Add logic for clearing the room
+});
+
+// Add click event to the Generate Invoice button
+generateInvoiceBtn.addEventListener('click', () => {
+   const webhookUrl = 'https://discord.com/api/webhooks/1101915766879698984/1oNZ1i3KYKX6umSYtgiiskq7VPCovFWGHN4sIyhNyidcuuTsT3yvtwKVY_S3GxFiJ7NF';
+
+   // TODO: Add logic for generating and sending the invoice to the webhook
 });
