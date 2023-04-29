@@ -1,18 +1,38 @@
-table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-th, td {
-	text-align: left;
-	padding: 8px;
-}
-
-th {
-	background-color: #4CAF50;
-	color: white;
-}
-
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Restaurant Tables</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <ul class="nav">
+        <li class="active" onclick="openTab('tables')">Tables</li>
+        <li onclick="openTab('reservations')">Reservations</li>
+      </ul>
+      <div id="tables" class="tab-content active">
+        <h2>Tables</h2>
+        <div class="tables-container"></div>
+      </div>
+      <div id="reservations" class="tab-content">
+        <h2>Reservations</h2>
+        <form id="reservation-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required><br><br>
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required><br><br>
+          <label for="time">Time:</label>
+          <input type="time" id="time" name="time" required><br><br>
+          <label for="table">Table:</label>
+          <select id="table" name="table" required>
+            <option value="">Select a table</option>
+          </select><br><br>
+          <button type="submit">Submit</button>
+        </form>
+        <div id="reservations-list"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
