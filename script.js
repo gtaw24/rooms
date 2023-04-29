@@ -1,84 +1,67 @@
-let tables = [
-  { name: "Table 101", status: "available", products: [] },
-  { name: "Table 102", status: "available", products: [] },
-  { name: "Table 103", status: "available", products: [] },
-  { name: "Table 104", status: "available", products: [] },
-  { name: "Table 105", status: "available", products: [] },
-  { name: "Table 106", status: "available", products: [] },
-  { name: "Table 107", status: "available", products: [] }
-];
+// Initialize the room status as available for all rooms
+let rooms = {
+  101: { status: "available", total: 0, products: [] },
+  102: { status: "available", total: 0, products: [] },
+  103: { status: "available", total: 0, products: [] },
+  104: { status: "available", total: 0, products: [] },
+  105: { status: "available", total: 0, products: [] },
+  106: { status: "available", total: 0, products: [] },
+  107: { status: "available", total: 0, products: [] },
+};
 
-function displayTables() {
-  let tableHtml = "";
-  for (let i = 0; i < tables.length; i++) {
-    let statusButton = "";
-    if (tables[i].status === "available") {
-      statusButton = `<button class="status-btn available" onclick="changeTableStatus(${i})">Available</button>`;
-    } else {
-      statusButton = `<button class="status-btn occupied" onclick="changeTableStatus(${i})">Occupied</button>`;
-    }
-    tableHtml += `
-      <div class="table">
-        <h3>${tables[i].name}</h3>
-        ${statusButton}
-        <div class="product-list" id="product-list-${i}">
-          <h4>Products:</h4>
-          <ul>
-            ${displayProducts(i)}
-          </ul>
-          <div>
-            <label for="product-name-${i}">Product Name:</label>
-            <input type="text" id="product-name-${i}" />
-          </div>
-          <div>
-            <label for="product-price-${i}">Product Price:</label>
-            <input type="number" id="product-price-${i}" />
-          </div>
-          <button onclick="addProduct(${i})">Add Product</button>
-        </div>
-        <div class="total" id="total-${i}">
-          <h4>Total: $${calculateTotal(i)}</h4>
-        </div>
-      </div>
-    `;
-  }
-  document.getElementById("tables-container").innerHTML = tableHtml;
-}
-
-function displayProducts(tableIndex) {
-  let productHtml = "";
-  for (let i = 0; i < tables[tableIndex].products.length; i++) {
-    productHtml += `
-      <li>${tables[tableIndex].products[i].name} - $${tables[tableIndex].products[i].price}</li>
-    `;
-  }
-  return productHtml;
-}
-
-function addProduct(tableIndex) {
-  let productName = document.getElementById(`product-name-${tableIndex}`).value;
-  let productPrice = document.getElementById(`product-price-${tableIndex}`).value;
-  if (productName && productPrice) {
-    tables[tableIndex].products.push({ name: productName, price: productPrice });
-    displayTables();
-  }
-}
-
-function calculateTotal(tableIndex) {
-  let total = 0;
-  for (let i = 0; i < tables[tableIndex].products.length; i++) {
-    total += parseFloat(tables[tableIndex].products[i].price);
-  }
-  return total.toFixed(2);
-}
-
-function changeTableStatus(tableIndex) {
-  if (tables[tableIndex].status === "available") {
-    tables[tableIndex].status = "occupied";
+// Function to toggle room status
+function toggleStatus(roomNumber) {
+  const room = rooms[roomNumber];
+  if (room.status === "available") {
+    room.status = "occupied";
+    document.getElementById(roomNumber).classList.remove("available");
+    document.getElementById(roomNumber).classList.add("occupied");
   } else {
-    tables[tableIndex].status = "available";
+    room.status = "available";
+    document.getElementById(roomNumber).classList.remove("occupied");
+    document.getElementById(roomNumber).classList.add("available");
   }
-  displayTables();
 }
 
-displayTables();
+// Function to add product and price to the room
+function addProduct(roomNumber, product, price) {
+  const room = rooms[roomNumber];
+  room.products.push({ product: product, price: price });
+  room.total += price;
+  document.getElementById(`${roomNumber}-total`).textContent = room.total;
+  document.getElementById(roomNumber).classList.add("occupied");
+}
+
+// Function to clear the room
+function clearRoom(roomNumber) {
+  const room = rooms[roomNumber];
+  room.status = "available";
+  room.total = 0;
+  room.products = [];
+  document.getElementById(`${roomNumber}-total`).textContent = "";
+  document.getElementById(roomNumber).classList.remove("occupied");
+  document.getElementById(roomNumber).classList.add("available");
+}
+
+// Add event listeners to all room squares
+const roomSquares = document.querySelectorAll(".room");
+roomSquares.forEach((square) => {
+  square.addEventListener("click", () => {
+    const roomNumber = square.id;
+    const room = rooms[roomNumber];
+    if (room.status === "available") {
+      const product = prompt("Enter product name:");
+      const price = parseInt(prompt("Enter product price:"));
+      if (product && price) {
+        addProduct(roomNumber, product, price);
+      }
+    } else {
+      const confirmClear = confirm(
+        `Are you sure you want to clear room ${roomNumber}?`
+      );
+      if (confirmClear) {
+        clearRoom(roomNumber);
+      }
+    }
+  });
+});
