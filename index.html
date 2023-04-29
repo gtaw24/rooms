@@ -1,10 +1,36 @@
-<div class="room" id="101">
-   <p>101</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Hotel Room 101</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="room" id="room101">
+			<h2>101</h2>
+		</div>
+	</div>
 
-<div class="popup" id="popup">
-   <h2>Room 101</h2>
-   <button id="add-product-btn">Add or Remove Products and Prices</button>
-   <button id="clear-room-btn">Clear Room</button>
-   <button id="generate-invoice-btn">Generate Invoice</button>
-</div>
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2>Room 101</h2>
+			<div class="form-group">
+				<label for="product">Product:</label>
+				<input type="text" id="product" name="product">
+			</div>
+			<div class="form-group">
+				<label for="price">Price:</label>
+				<input type="number" id="price" name="price">
+			</div>
+			<button id="addProduct">Add Product</button>
+			<button id="clearRoom">Clear Room</button>
+			<button id="invoice">Invoice</button>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
